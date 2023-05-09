@@ -1,30 +1,13 @@
 // theme.ts
+import Theme from '../typings/theme/theme'
 
-export interface Theme {
-    colors: {
-      primary: string;
-      secondary: string;
+import { colors } from './colors'
+import { typography } from './typography'
 
-    };
-    spacing: {
-      small: string;
-      medium: string;
-      large: string;
+const defaultTheme: Theme = {
+  colors: colors,
+  spacing: 8,
+  typography: typography,
+}
 
-    };
-
-  }
-  
-  export const defaultTheme: Theme = {
-    colors: {
-      primary: '#007bff',
-      secondary: '#6c757d',
-    },
-    spacing: {
-      small: '8px',
-      medium: '16px',
-      large: '24px',
-    },
-
-  };
-  
+export default defaultTheme
