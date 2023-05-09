@@ -1,8 +1,11 @@
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
+
 import * as packageJson from './package.json'
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
+  plugins: [tsconfigPaths()],
   build: {
     lib: {
       entry: resolve('src', 'components/index.ts'),
