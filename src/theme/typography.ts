@@ -1,6 +1,6 @@
-import { themeTypography } from '../typings/theme/typography'
+import { ThemeTypography } from '../typings/theme/typography'
 
-export const typography: themeTypography = {
+export const typography: ThemeTypography = {
   fontFamily: 'Roboto, sans-serif',
   baseFontSize: 16,
   h1: {

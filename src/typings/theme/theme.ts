@@ -1,9 +1,9 @@
-import type { themeColors } from './colors'
-import type { themeTypography } from './typography'
+import type { ThemeColors } from './colors'
+import type { ThemeTypography } from './typography'
 
 type Theme = {
-  colors: themeColors
-  typography: themeTypography
+  colors: ThemeColors
+  typography: ThemeTypography
   spacing: number
 }
 

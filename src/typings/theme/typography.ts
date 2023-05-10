@@ -1,20 +1,20 @@
-type baseTypograhy = {
+type BaseTypography = {
   fontSize: string | number
   fontWeight?: number
   lineHeight?: number
-  letteSpacing?: number
+  letterSpacing?: number
 }
 
-export type themeTypography = {
+export type ThemeTypography = {
   baseFontSize: number
   baseFontWeight?: number
   fontFamily: string
-  h1: baseTypograhy
-  h2: baseTypograhy
-  h3: baseTypograhy
-  h4: baseTypograhy
-  h5: baseTypograhy
-  h6: baseTypograhy
-  body1: baseTypograhy
-  body2: baseTypograhy
+  h1: BaseTypography
+  h2: BaseTypography
+  h3: BaseTypography
+  h4: BaseTypography
+  h5: BaseTypography
+  h6: BaseTypography
+  body1: BaseTypography
+  body2: BaseTypography
 }

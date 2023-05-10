@@ -1,6 +1,6 @@
-import { themeColors } from '../typings/theme/colors'
+import { ThemeColors } from '../typings/theme/colors'
 
-export const colors: themeColors = {
+export const colors: ThemeColors = {
   common: {
     white: '#FFFFFF',
     black: '#000',

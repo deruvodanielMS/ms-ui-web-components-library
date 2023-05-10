@@ -1,4 +1,4 @@
-export type themeColors = {
+export type ThemeColors = {
   common: {
     black: string
     white: string
