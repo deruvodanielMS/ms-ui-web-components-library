@@ -4,8 +4,8 @@ export type ThemeColors = {
     black: string
   }
   primary: {
-    main: string
     light?: string
+    main: string
     dark?: string
     lightBackground?: string
   }
