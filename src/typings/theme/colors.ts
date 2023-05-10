@@ -1,7 +1,7 @@
 export type ThemeColors = {
   common: {
-    black: string
     white: string
+    black: string
   }
   primary: {
     main: string
