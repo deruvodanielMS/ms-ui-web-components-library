@@ -1,5 +1,3 @@
-import { extractCssVariables } from '~/utils'
-
 const styles = new CSSStyleSheet()
 styles.replaceSync(`
 section {
@@ -76,7 +74,7 @@ export class MSUserAccess extends HTMLElement {
     this.msAvatar = this.root.querySelector('ms-avatar')!
     this.msInputAction = this.root.querySelector('ms-input-action')!
 
-    const baseTheme = `:host{${extractCssVariables({})}`
+    const baseTheme = `:host{}`
     styles.insertRule(baseTheme, 0)
     this.root.adoptedStyleSheets = [...document.adoptedStyleSheets, styles]
   }

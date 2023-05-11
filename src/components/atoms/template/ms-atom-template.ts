@@ -1,5 +1,3 @@
-import { extractCssVariables } from '~/utils'
-
 const sheet = new CSSStyleSheet()
 sheet.replaceSync(`
 button {
@@ -59,14 +57,14 @@ export type MSAtomTemplateProps = {
 export class MSAtomTemplate extends HTMLElement {
   private button: HTMLButtonElement
 
-  constructor(theme = {} /*@TODO: import default MS theme*/) {
+  constructor() {
     super()
 
     const shadowRoot = this.attachShadow({ mode: 'open' })
 
     shadowRoot.appendChild(template.content.cloneNode(true))
 
-    const baseTheme = `:host{${extractCssVariables(theme)}`
+    const baseTheme = `:host{}`
     sheet.insertRule(baseTheme, 0)
     shadowRoot.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
 
