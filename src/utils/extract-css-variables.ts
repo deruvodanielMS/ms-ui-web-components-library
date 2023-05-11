@@ -1,4 +1,6 @@
-export const extractCssVariables = (theme: any /*@TODO: update with MS theme Type*/) => {
+import { ThemeColors } from "~/typings/theme/colors"
+
+export const extractCssVariables = (theme: ThemeColors) => {
   const entries = Object.entries(theme)
   const cssVariables = entries.reduce((acc, [key, value]) => {
     const subEntries = Object.entries(value)

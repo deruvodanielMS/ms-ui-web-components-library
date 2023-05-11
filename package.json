@@ -1,10 +1,11 @@
 {
   "name": "ms-ui-web-components-library",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.0.1",
   "type": "module",
+  "main": "./dist",
   "engines": {
-    "node": ">=18.15.0",
+    "node": ">=18.0.0",
     "yarn": ">=1.22.0",
     "npm": "please-use-yarn"
   },

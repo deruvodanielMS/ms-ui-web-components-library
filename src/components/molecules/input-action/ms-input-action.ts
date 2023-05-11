@@ -1,5 +1,3 @@
-import { extractCssVariables } from '~/utils'
-
 const styles = new CSSStyleSheet()
 styles.replaceSync(`
 input {
@@ -53,7 +51,7 @@ export class MSInputAction extends HTMLElement {
     this.textInput = this.root.querySelector('input')!
     this.actionBtn = this.root.querySelector('button')!
 
-    const baseTheme = `:host{${extractCssVariables({})}`
+    const baseTheme = `:host{}`
     styles.insertRule(baseTheme, 0)
     this.root.adoptedStyleSheets = [...document.adoptedStyleSheets, styles]
   }
