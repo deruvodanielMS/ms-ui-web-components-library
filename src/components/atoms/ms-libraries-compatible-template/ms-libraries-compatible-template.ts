@@ -74,7 +74,7 @@ export class MSAvatar extends MSHTMLElement {
     return this.getAttribute('image')
   }
 
-  set image(img: string) {
+  set image(img: string | null) {
     if (img) {
       this.setAttribute('image', img)
     } else {
@@ -86,7 +86,7 @@ export class MSAvatar extends MSHTMLElement {
     return this.getAttribute('fallback')
   }
 
-  set fallback(fallback: string) {
+  set fallback(fallback: string | null) {
     if (fallback) {
       this.setAttribute('fallback', fallback)
     } else {

@@ -1,29 +1,40 @@
-import defaultTheme from '~/theme/theme'
-import { extractCssVariables } from '~/utils'
-
 const styles = new CSSStyleSheet()
 styles.replaceSync(`
+:host {
+    position: relative;
+    display: inline-flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    background-color: #9679E4;
+}
 img {
   width: 100%;
   height: 100%;
-  background-color: var(--primary-main);
+  background-color: purple;
   border: 1px solid #FFFFFF;
+  box-sizing: border-box;
   border-radius: 50%;
   object-fit: cover;
 }
 div {
-  display: flex;
+  position: absolute;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   border: 1px solid #FFFFFF;
+  box-sizing: border-box;
   background-color: #ADABB3;
   font-family: 'Inter', Sans-Serif;
   color: #FFFFFF;
 }
 svg {
+  position: absolute;
   width: 30px;
   height: 30px;
   vertical-align: middle;
@@ -39,75 +50,85 @@ viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
 </svg>
 `
 
-export type MSAvatarProps = {
-  'user-src': string
-  'user-name': string
-}
-
 export class MSAvatar extends HTMLElement {
   private root: ShadowRoot
-  private img: HTMLImageElement
 
-  constructor(theme = defaultTheme) {
+  constructor() {
     super()
     this.root = this.attachShadow({ mode: 'open' })
-
-    this.img = document.createElement('img')
-    this.root.appendChild(this.img)
-    const baseRootRules = `:host{display: inline-block;width: 48px; height: 48px; overflow: hidden;  border-radius: 50%;${extractCssVariables(
-      theme.colors,
-    )}`
-    console.log(baseRootRules)
-    styles.insertRule(baseRootRules, 0)
     this.root.adoptedStyleSheets = [...document.adoptedStyleSheets, styles]
   }
 
-  static get observedAttributes(): (keyof MSAvatarProps)[] {
-    return ['user-src', 'user-name']
+  get image(): string | null {
+    return this.getAttribute('image')
   }
 
-  attributeChangedCallback(name: keyof MSAvatarProps, oldValue: string, newValue: string) {
-    if (name === 'user-src' && oldValue !== newValue) this.updateUserSrc(newValue)
-    if (name === 'user-name' && oldValue !== newValue) this.updateUserName(newValue)
+  set image(img: string | null) {
+    if (img) {
+      this.setAttribute('image', img)
+    } else {
+      this.removeAttribute('image')
+    }
+  }
+
+  get alt(): string | null {
+    return this.getAttribute('alt')
+  }
+
+  set alt(alt: string | null) {
+    if (alt) {
+      this.setAttribute('alt', alt)
+    } else {
+      this.removeAttribute('alt')
+    }
+  }
+
+  static get observedAttributes() {
+    return ['image', 'alt']
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (name === 'image' && newValue !== oldValue) {
+      this.image = newValue
+    }
+    if (name === 'fallback' && newValue !== oldValue) {
+      this.alt = newValue
+    }
+    this.render()
   }
 
   connectedCallback() {
-    const hasValidSrc = Boolean(this.img.src)
-    const hasValidName = Boolean(this.img.alt)
+    this.addEventListener('click', () => {
+      const onNextEvent = new CustomEvent('on-next', {
+        detail: { img: this.image, alt: this.alt },
+        bubbles: true,
+        composed: true,
+      })
+      this.dispatchEvent(onNextEvent)
+    })
 
-    if (!hasValidSrc && hasValidName) {
-      const content = document.createElement('div')
-      content.textContent = this.img.alt
-        .split(' ')
-        .map((n) => n[0].toUpperCase())
-        .join('')
-      this.replaceContent(content)
-      return
-    }
-    if (!hasValidSrc && !hasValidName) {
-      const container = document.createElement('div')
-      container.style.backgroundColor = 'var(--primary-main)'
-      container.style.border = 'none'
-      container.innerHTML = userSvg
-      this.replaceContent(container)
-      return
-    }
+    this.render()
   }
 
-  private updateUserSrc(val: string) {
-    // this.img.src = val find a better way to re render
-    const newImg = document.createElement('img')
-    newImg.src = val
-    this.replaceContent(newImg)
-  }
-
-  private updateUserName(val: string) {
-    this.img.alt = val
-  }
-
-  private replaceContent(el: HTMLElement) {
+  render() {
     this.root.innerHTML = ''
-    this.root.appendChild(el)
+    if (this.image) {
+      // eslint-disable-next-line no-console
+      console.log('audiman', this.image)
+      const img = document.createElement('img')
+      img.src = this.image
+      this.alt && (img.alt = this.alt)
+      this.root.appendChild(img)
+      return
+    }
+    if (this.alt) {
+      const content = document.createElement('div')
+      const match = this.alt.match(/(\w)\w*\s*(\w)?/)
+      content.textContent = match ? match.slice(1).join('').toUpperCase() : ''
+      this.root.appendChild(content)
+      return
+    }
+    this.root.innerHTML = userSvg
   }
 }
 
