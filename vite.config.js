@@ -1,6 +1,7 @@
-import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+
+import { resolve } from 'node:path'
 
 import * as packageJson from './package.json'
 // https://vitejs.dev/config/
@@ -14,7 +15,7 @@ export default defineConfig(() => ({
       fileName: (format) => `ms-ui-web-components-library.${format}.js`,
     },
     rollupOptions: {
-      external: [...Object.keys(packageJson.peerDependencies)],
+      external: [...Object.keys(packageJson.peerDependencies), new RegExp(/\b\w*template\w*\b/gi)],
     },
   },
 }))
