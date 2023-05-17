@@ -113,8 +113,6 @@ export class MSAvatar extends HTMLElement {
   render() {
     this.root.innerHTML = ''
     if (this.image) {
-      // eslint-disable-next-line no-console
-      console.log('audiman', this.image)
       const img = document.createElement('img')
       img.src = this.image
       this.alt && (img.alt = this.alt)
