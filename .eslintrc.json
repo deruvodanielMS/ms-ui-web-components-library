@@ -14,8 +14,20 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "filename-rules"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "plugins": ["@typescript-eslint", "filename-rules", "import"],
   "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": ["external", "builtin", "internal"],
+        "newlines-between": "always"
+      }
+    ],
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -24,6 +36,23 @@
       }
     ],
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
-    "filename-rules/match": [2, "kebabcase"]
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "prefer": "type-imports", "disallowTypeAnnotations": true }
+    ],
+    "@typescript-eslint/prefer-as-const": "error",
+    "filename-rules/match": [2, "kebabcase"],
+    "no-console": "error",
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "never"
+      }
+    ],
+    "no-mixed-operators": "error",
+    "import/no-absolute-path": "error",
+    "import/no-duplicates": "error",
+    "import/no-unresolved": "error"
   }
 }

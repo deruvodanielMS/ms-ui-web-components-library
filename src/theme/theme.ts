@@ -1,13 +1,10 @@
-// theme.ts
-import Theme from '../typings/theme/theme'
+import type { Theme } from '~/typings/theme'
 
 import { colors } from './colors'
 import { typography } from './typography'
 
-const defaultTheme: Theme = {
+export const defaultTheme: Theme = {
   colors: colors,
   spacing: 8,
   typography: typography,
 }
-
-export default defaultTheme
