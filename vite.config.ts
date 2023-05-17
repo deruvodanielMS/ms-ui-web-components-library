@@ -20,7 +20,6 @@ export default defineConfig(() => ({
       name: 'MSWebComponentsLibrary',
       formats: ['es', 'umd'],
       fileName: 'ms-ui-web-components-library',
-      // fileName: (format) => `ms-ui-web-components-library.${format}.js`,
     },
     rollupOptions: {
       external: [...Object.keys(packageJson.peerDependencies), new RegExp(/\b\w*template\w*\b/gi)],
