@@ -1,12 +1,11 @@
 {
   "name": "ms-ui-web-components-library",
   "private": false,
-  "version": "0.0.11",
+  "version": "0.0.12",
   "type": "module",
-  "main": "./dist",
-  "files": [
-    "dist"
-  ],
+  "module": "./dist/ms-ui-web-components-library.es.js",
+  "main": "./dist/ms-ui-web-components-library.umd.js",
+  "types": "./dist/ms-ui-web-components-library.d.ts",
   "exports": {
     ".": {
       "import": "./dist/ms-ui-web-components-library.es.js",
@@ -18,6 +17,9 @@
     "yarn": ">=1.22.0",
     "npm": "please-use-yarn"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -38,8 +40,6 @@
     "@storybook/html-vite": "7.0.9",
     "@storybook/jest": "^0.1.0",
     "@storybook/testing-library": "0.0.14-next.2",
-    "@types/babel__core": "^7.20.0",
-    "@types/babel__template": "^7.4.1",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "eslint": "^8.39.0",
@@ -54,6 +54,7 @@
     "storybook": "7.0.9",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
+    "vite-plugin-dts": "^2.3.0",
     "vite-tsconfig-paths": "^4.2.0"
   },
   "peerDependencies": {},
@@ -68,5 +69,6 @@
       "yarn  format"
     ]
   },
+  "license": "MIT",
   "dependencies": {}
 }
