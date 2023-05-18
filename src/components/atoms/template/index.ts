@@ -1,1 +1,3 @@
-export * from './ms-atom-template'
+
+export * from './ms-atom-template';
+
