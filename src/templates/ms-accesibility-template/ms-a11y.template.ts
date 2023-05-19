@@ -1,6 +1,6 @@
 const sheet = new CSSStyleSheet();
 sheet.replaceSync(`
-button {
+  button {
     appearance: none;
     background-color: transparent;
     border: 0.125em solid var(--colors-primary);
@@ -25,24 +25,24 @@ button {
     -webkit-user-select: none;
     touch-action: manipulation;
     will-change: transform;
-   }
-   
-   button:disabled {
+  }
+
+  button:disabled {
     pointer-events: none;
-   }
-   
-   button:hover {
+  }
+
+  button:hover {
     color: #fff;
     background-color: var(--colors-primary);
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
-   }
-   
-   button:active {
+  }
+
+  button:active {
     box-shadow: none;
     transform: translateY(0);
-   }
-  `)
+  }
+`);
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -52,8 +52,8 @@ template.innerHTML = `
 export type MSA11yTemplateProps = {
     title: string;
     disabled: boolean;
-    isSubmit: boolean; // Prop to difine Button / Submit
-} & HTMLElement;
+    isSubmit: boolean;
+}
 
 export class MSA11yTemplate extends HTMLElement {
     private button: HTMLButtonElement | HTMLInputElement;
@@ -62,12 +62,11 @@ export class MSA11yTemplate extends HTMLElement {
         super();
 
         const shadowRoot = this.attachShadow({ mode: 'open' });
-
+        shadowRoot.innerHTML = `
+      <style>:host {}</style>
+    `;
+        shadowRoot.adoptedStyleSheets = [sheet];
         shadowRoot.appendChild(template.content.cloneNode(true));
-
-        const baseTheme = `:host {}`;
-        sheet.insertRule(baseTheme, 0);
-        shadowRoot.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
 
         this.button = shadowRoot.querySelector('button')!;
         this.button.addEventListener('click', this.handleClick.bind(this));
@@ -76,7 +75,7 @@ export class MSA11yTemplate extends HTMLElement {
     connectedCallback() {
         this.updateButtonText(this.getAttribute('title') || '');
         this.updateButtonDisabled(this.getAttribute('disabled') || '');
-        this.updateButtonType(this.getAttribute('isSubmit') || ''); // Update Button by Property
+        this.updateButtonType(this.getAttribute('isSubmit') || '');
     }
 
     static get observedAttributes(): (keyof MSA11yTemplateProps)[] {
@@ -101,16 +100,16 @@ export class MSA11yTemplate extends HTMLElement {
 
     updateButtonText(val: string) {
         this.button.innerText = val;
-        this.button.setAttribute('aria-label', val); // Add aria-label atribute with text
+        this.button.setAttribute('aria-label', val);
     }
 
     updateButtonDisabled(val: string) {
         const isDisabled = !!val;
         this.button.disabled = isDisabled;
         if (isDisabled) {
-            this.button.setAttribute('aria-disabled', 'true'); // Add aria-disabled if disabled
+            this.button.setAttribute('aria-disabled', 'true');
         } else {
-            this.button.removeAttribute('aria-disabled'); // Remove aria-disabled if not
+            this.button.removeAttribute('aria-disabled');
         }
     }
 
@@ -119,25 +118,47 @@ export class MSA11yTemplate extends HTMLElement {
         if (isSubmit) {
             const input = document.createElement('input');
             input.type = 'submit';
-            input.value = this.button.innerText; // Set the value of the input as the text of the button
+            input.value = this.button.innerText;
+
+            // Copiar atributos ARIA del botón original al nuevo input
+            const ariaLabel = this.button.getAttribute('aria-label');
+            const ariaDisabled = this.button.getAttribute('aria-disabled');
+            if (ariaLabel) {
+                input.setAttribute('aria-label', ariaLabel);
+            }
+            if (ariaDisabled) {
+                input.setAttribute('aria-disabled', ariaDisabled);
+            }
+
             this.button.replaceWith(input);
             this.button = input;
             this.button.addEventListener('click', this.handleClick.bind(this));
         } else {
             const button = document.createElement('button');
-            button.innerText = this.button.innerText; // Set the text of the new button
+            button.innerText = this.button.innerText;
+
+            // Copiar atributos ARIA del input original al nuevo botón
+            const ariaLabel = this.button.getAttribute('aria-label');
+            const ariaDisabled = this.button.getAttribute('aria-disabled');
+            if (ariaLabel) {
+                button.setAttribute('aria-label', ariaLabel);
+            }
+            if (ariaDisabled) {
+                button.setAttribute('aria-disabled', ariaDisabled);
+            }
+
             this.button.replaceWith(button);
             this.button = button;
             this.button.addEventListener('click', this.handleClick.bind(this));
         }
     }
 
-
     handleClick() {
         if (!this.button.disabled) {
-            this.dispatchEvent(new Event('button-click')); // Fire event on click
+            this.dispatchEvent(new Event('button-click'));
         }
     }
+
 }
 
 customElements.get('ms-a11y-template') ||

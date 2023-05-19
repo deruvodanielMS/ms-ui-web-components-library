@@ -13,7 +13,7 @@ const template = (args: MSA11yTemplateProps) =>
 const meta = {
     title: 'Examples/ms-a11y-template',
     component: MSA11yTemplate,
-    render: (args) => template(args),
+    render: (args: MSA11yTemplateProps) => template(args),
     parameters: {
         actions: {
             handles: ['mouseover', 'click'],
