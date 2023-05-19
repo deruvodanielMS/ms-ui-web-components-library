@@ -100,16 +100,16 @@ export class MSA11yTemplate extends HTMLElement {
 
     updateButtonText(val: string) {
         this.button.innerText = val;
-        this.button.setAttribute('aria-label', val);
+        this.setAttribute('aria-label', val);
     }
 
     updateButtonDisabled(val: string) {
         const isDisabled = !!val;
         this.button.disabled = isDisabled;
         if (isDisabled) {
-            this.button.setAttribute('aria-disabled', 'true');
+            this.setAttribute('aria-disabled', 'true');
         } else {
-            this.button.removeAttribute('aria-disabled');
+            this.removeAttribute('aria-disabled');
         }
     }
 
@@ -120,7 +120,6 @@ export class MSA11yTemplate extends HTMLElement {
             input.type = 'submit';
             input.value = this.button.innerText;
 
-            // Copiar atributos ARIA del botón original al nuevo input
             const ariaLabel = this.button.getAttribute('aria-label');
             const ariaDisabled = this.button.getAttribute('aria-disabled');
             if (ariaLabel) {
@@ -137,7 +136,6 @@ export class MSA11yTemplate extends HTMLElement {
             const button = document.createElement('button');
             button.innerText = this.button.innerText;
 
-            // Copiar atributos ARIA del input original al nuevo botón
             const ariaLabel = this.button.getAttribute('aria-label');
             const ariaDisabled = this.button.getAttribute('aria-disabled');
             if (ariaLabel) {
