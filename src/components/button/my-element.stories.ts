@@ -6,14 +6,11 @@ import './my-element';
 
 export default {
     title: 'My Element',
-    parameters: {
-        layout: 'centered',
-    },
     argTypes: {
         onOpen: { action: 'onClick' },
     },
     render: (args) => html`
-        <my-element @click=${args.onOpen} name=${args.name} style=${`--my-element-color: ${args.color};`}></my-element>
+        <my-element @click=${args.onOpen} name=${args.name} style=${`--my-element-color: ${args.color}; --my-element-button-color: ${args.colorButton}; --my-element-background-color: ${args.colorBgButton};`}></my-element>
     `,
 } as Meta;
 
@@ -21,6 +18,8 @@ export const Default: StoryObj = {
     name: 'Default',
     args: {
         name: 'Lit',
-        color: unsafeCSS(themeOptions.palette.error.light),
+        color: unsafeCSS(themeOptions.palette.warning.dark),
+        colorButton: unsafeCSS(themeOptions.palette.info.dark),
+        colorBgButton: unsafeCSS(themeOptions.palette.lightBackground.primary),
     },
 };
