@@ -22,13 +22,18 @@ export class MyElement extends LitElement {
     }
 
     /* button styles */
-    button {
+    button, input {
       color: var(--my-element-button-color);
       background-color: var(--my-element-background-color);
       border-radius: 4px;
       padding: 0.5rem 1rem;
       font-size: 1rem;
     }
+
+    input {
+      background-color: var(--my-element-color);
+    }
+
   `;
 
   /**
@@ -43,15 +48,35 @@ export class MyElement extends LitElement {
   @property({ type: Number })
   count = 0;
 
+  /**
+   * Whether to show the button as a submit button.
+   */
+  @property({ type: Boolean })
+  isSubmit = false;
+
+  private _onButtonKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this._onClick();
+    }
+  }
+
   render() {
     return html`
       <!-- Hello message -->
       <h1>Hello, ${this.name}!</h1>
 
       <!-- Button -->
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
+      ${this.isSubmit
+        ? html`
+            <input type="button" @click=${this._onClick} @keydown=${this._onButtonKeyDown} part="button" value="Click Count: ${this.count}" />
+          `
+        : html`
+            <button @click=${this._onClick} @keydown=${this._onButtonKeyDown} part="button" role="button" aria-label="Increment Count">
+              Click Count: ${this.count}
+            </button>
+          `}
+
+      <div id="dialog-description">Clicking this button will open a dialog to increment the count.</div>
 
       <!-- Slot content -->
       <slot></slot>
