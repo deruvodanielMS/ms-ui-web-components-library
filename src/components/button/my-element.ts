@@ -1,6 +1,6 @@
-import { LitElement, css, html, unsafeCSS } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import themeOptions from '../../common/theme/base-theme';
+import { myElementStyles } from './my-element.styles';
 
 /**
  * An example element.
@@ -11,30 +11,7 @@ import themeOptions from '../../common/theme/base-theme';
 
 @customElement('my-element')
 export class MyElement extends LitElement {
-  static styles = css`
-    /* :host styles */
-    :host {
-      display: block;
-      color: var(--my-element-color);
-      padding: 2rem;
-      max-width: 800px;
-      font-family: ${unsafeCSS(themeOptions.typography.fontFamily)};
-    }
-
-    /* button styles */
-    button, input {
-      color: var(--my-element-button-color);
-      background-color: var(--my-element-background-color);
-      border-radius: 4px;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-    }
-
-    input {
-      background-color: var(--my-element-color);
-    }
-
-  `;
+  static styles = [myElementStyles];
 
   /**
    * The name to say "Hello" to.
