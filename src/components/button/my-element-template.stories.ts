@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/web-components';
 import { html, unsafeCSS } from 'lit';
 import themeOptions from '../../common/theme/base-theme';
 
-import './my-element';
+import './my-element.template';
 
 export default {
     title: 'My Element',

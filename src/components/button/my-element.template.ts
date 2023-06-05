@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { myElementStyles } from './my-element.styles';
+import { myElementStyles } from './my-element.template.styles';
 
 /**
  * An example element.
