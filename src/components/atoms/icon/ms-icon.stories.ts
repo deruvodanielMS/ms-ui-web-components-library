@@ -5,13 +5,15 @@ import './ms-icon'
 
 export default {
   title: 'MS icon',
-  argTypes: {
-    onOpen: { action: 'onClick' },
+  argTypes: {},
+  render: (args) => {
+    return html` <ms-icon .iconClass=${args.iconClass}> </ms-icon> `
   },
-  render: (_) => html`<ms-icon></ms-icon> `,
 } as Meta
 
 export const Default: StoryObj = {
   name: 'ms icon',
-  args: {},
+  args: {
+    iconClass: 'fa-brands fa-tiktok',
+  },
 }

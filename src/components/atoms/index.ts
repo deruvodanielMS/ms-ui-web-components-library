@@ -1,0 +1,1 @@
+export { MSIcon } from './icon'

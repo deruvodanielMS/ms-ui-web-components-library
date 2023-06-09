@@ -3,7 +3,6 @@ import { customElement, property } from 'lit/decorators.js'
 
 import { myElementStyles } from './my-element.styles'
 
-import '../../../libs/icomoon/style.css'
 /**
  * An example element.
  *
