@@ -7,7 +7,9 @@ import { msCheckboxStyles } from './ms-checkbox.styles'
 
 @customElement('ms-checkbox')
 export class MSCheckbox extends WithTheme(LitElement) {
-  static styles = [msCheckboxStyles]
+  static styles = msCheckboxStyles
+
+  //@TODO: add js doc
 
   @property({ type: Boolean })
   checked = false

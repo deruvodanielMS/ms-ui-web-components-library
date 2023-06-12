@@ -7,9 +7,10 @@ import { msInputCheckboxStyles } from './ms-input-checkbox.styles'
 
 @customElement('ms-input-checkbox')
 export class MSInputCheckbox extends WithTheme(LitElement) {
-  static styles = [msInputCheckboxStyles]
+  static styles = msInputCheckboxStyles
 
   //@TODO: change label & span with Typography component
+  //@TODO: add js doc
 
   @property({ type: String })
   title = ''
