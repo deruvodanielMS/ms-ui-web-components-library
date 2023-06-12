@@ -1,25 +1,12 @@
 import { css } from 'lit';
 
+//@TODO: modify styles with var on style-dictionary & theme
+
 export const msCheckboxStyles = css`
 
 :host {
         display: flex;
         flex-direction: row;
-    }
-    div {
-        display: flex;
-        flex-direction: column;
-    }
-
-    span {
-        font-size: 15px;
-        line-height: 24px;
-    }
-
-    label {
-        color: #37363B;
-        font-size: 17px;
-        line-height: 24px;
     }
 
     input[type=checkbox] {

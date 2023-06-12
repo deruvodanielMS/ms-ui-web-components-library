@@ -9,15 +9,13 @@ export default {
         onCheck: { action: 'onChange' },
     },
     render: (args) => html`
-    <ms-checkbox .checked=${args.checked} @change=${args.onCheck} .title=${args.title} ?disabled=${args.disabled} .description=${args.description}>${args.label}</ms-checkbox>
+    <ms-checkbox .checked=${args.checked} @change=${args.onCheck} ?disabled=${args.disabled}>${args.label}</ms-checkbox>
     `
 } as Meta;
 
 export const Checkbox: StoryObj = {
     name: 'MSCheckbox',
     args: {
-        title: '',
-        description: '',
         checked: false,
         disabled: true
     }

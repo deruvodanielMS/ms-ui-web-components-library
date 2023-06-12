@@ -1,17 +1,13 @@
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
+import { WithTheme } from "~/mixins";
+
 import { msCheckboxStyles } from "./ms-checkbox.styles";
 
 @customElement('ms-checkbox')
-export class MSCheckbox extends LitElement {
+export class MSCheckbox extends WithTheme(LitElement) {
     static styles = [msCheckboxStyles]
-
-    @property({ type: String })
-    title = '';
-
-    @property({ type: String })
-    description = '';
 
     @property({ type: Boolean })
     checked = false;
@@ -20,15 +16,11 @@ export class MSCheckbox extends LitElement {
     disabled = false;
 
     render() {
-        return html`
+        return this.renderWithStyles(html`
          
-            <input ?disabled=${this.disabled} type='checkbox' .checked=${this.checked} @change=${this.handleChange}/>
-            <div>
-                <label> ${this.title}</label>
-                <span>${this.description}</span>
-            </div>
-           
-        `
+        <input ?disabled=${this.disabled} type='checkbox' .checked=${this.checked} @change=${this.handleChange}/>
+       
+    `)
     }
 
     handleChange(event: Event) {
