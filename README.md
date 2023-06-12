@@ -17,4 +17,3 @@ Custom UI library based on Web Components
 
 - To run Storybook `$ yarn storybook`
 - Its open on `http://localhost:6006/`
-  ()
