@@ -24,6 +24,8 @@ export class MSCheckbox extends WithTheme(LitElement) {
         type="checkbox"
         .checked=${this.checked}
         @change=${this.handleChange}
+        aria-disabled="${this.disabled ? 'true' : 'false'}"
+        aria-checked="${this.checked ? 'true' : 'false'}"
       />
     `)
   }

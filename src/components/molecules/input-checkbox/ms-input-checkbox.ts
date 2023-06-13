@@ -21,8 +21,8 @@ export class MSInputCheckbox extends WithTheme(LitElement) {
   render() {
     return this.renderWithStyles(html`
       <ms-checkbox></ms-checkbox>
-      <div>
-        <label> ${this.title}</label>
+      <div role="group" aria-labelledby="label-${this.id}">
+        <label id="label-${this.id}"> ${this.title}</label>
         <span>${this.description}</span>
       </div>
     `)
