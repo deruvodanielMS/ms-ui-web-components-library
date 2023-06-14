@@ -7,5 +7,10 @@
     <title>MS web components library</title>
     <script type="module" src="/src/main.ts"></script>
   </head>
-  <body></body>
+  <body>
+    <ms-title-template>Title outside</ms-title-template>
+    <ms-theme-provider admin-user-primary-main="pink">
+      <ms-title-template>Title inside</ms-title-template>
+    </ms-theme-provider>
+  </body>
 </html>

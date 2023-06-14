@@ -7,7 +7,7 @@ import type { MSTheme } from './theme-default'
 export class MSThemeManager {
   private _theme: MSTheme
   constructor(theme: MSTheme) {
-    this._theme = theme
+    this._theme = structuredClone(theme)
   }
   get theme() {
     return this._theme
@@ -19,18 +19,6 @@ export class MSThemeManager {
 
   public updateColor(key: keyof MSTheme['colors'], val: string) {
     this._theme.colors[key] = val
-  }
-
-  public updateFont(key: keyof MSTheme['fonts'], val: string) {
-    this._theme.fonts[key] = val
-  }
-
-  public updateFontWeight(key: keyof MSTheme['fontWeights'], val: number) {
-    this._theme.fontWeights[key] = val
-  }
-
-  public updateLineHeight(key: keyof MSTheme['lineHeights'], val: number) {
-    this._theme.lineHeights[key] = val
   }
 }
 

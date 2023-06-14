@@ -23,6 +23,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:styles": "node ./src/styles/generator-script.js",
+    "transform": "token-transformer ./src/style-dictionary/tokens-base/tokens.json ./src/style-dictionary/tokens/ms_tokens.json --expandTypography=true --expandShadow=true --expandComposition=true --expandBorder=true --preserveRawValue=false --resolveReferences=false",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -55,6 +57,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "storybook": "7.0.18",
+    "style-dictionary": "^3.8.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0",
