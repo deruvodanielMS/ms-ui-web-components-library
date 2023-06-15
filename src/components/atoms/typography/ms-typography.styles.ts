@@ -4,7 +4,7 @@ import { setFont } from '~/utils'
 
 //@TODO: modify styles with var on style-dictionary & theme
 
-export const msCheckboxStyles = css`
+export const msTypographyStyles = css`
   h1 {
     ${setFont(56, 64)}
   }
