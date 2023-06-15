@@ -5,15 +5,25 @@ import { WithTheme } from '~/mixins'
 
 import { msCheckboxStyles } from './ms-checkbox.styles'
 
+/**
+ * @element ms-checkbox
+ * @description Custom element for a checkbox component.
+ */
 @customElement('ms-checkbox')
 export class MSCheckbox extends WithTheme(LitElement) {
   static styles = msCheckboxStyles
 
-  //@TODO: add js doc
-
+  /**
+   * @property {boolean} checked - Whether the checkbox is checked.
+   * @default false
+   */
   @property({ type: Boolean })
   checked = false
 
+  /**
+   * @property {boolean} disabled - Whether the checkbox is disabled.
+   * @default false
+   */
   @property({ type: Boolean })
   disabled = false
 
@@ -26,10 +36,16 @@ export class MSCheckbox extends WithTheme(LitElement) {
         @change=${this.handleChange}
         aria-disabled="${this.disabled ? 'true' : 'false'}"
         aria-checked="${this.checked ? 'true' : 'false'}"
+        aria-label="checkbox"
       />
     `)
   }
 
+  /**
+   * Handles the change event of the checkbox.
+   *
+   * @param {Event} event - The change event.
+   */
   handleChange(event: Event) {
     const checkbox = event.target as HTMLInputElement
     this.checked = checkbox.checked

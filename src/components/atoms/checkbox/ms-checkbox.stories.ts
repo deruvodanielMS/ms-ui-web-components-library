@@ -19,6 +19,6 @@ export const Checkbox: StoryObj = {
   name: 'MSCheckbox',
   args: {
     checked: false,
-    disabled: true,
+    disabled: false,
   },
 }
