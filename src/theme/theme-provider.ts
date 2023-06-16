@@ -2,83 +2,55 @@ import { provide } from '@lit-labs/context'
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
+import { darkColors } from '~/styles/usable-tokens/dark-color'
+import { objToCssVars, truthyMerge } from '~/utils'
+
 import { MSThemeManager, msThemeContext } from './theme-context'
+import type { MSTheme } from './theme-default'
 import { defaultMSTheme } from './theme-default'
+import { extractColorProperties } from './theme-helper'
 
 @customElement('ms-theme-provider')
 export class MSThemeProvider extends LitElement {
+  static properties = extractColorProperties(defaultMSTheme.colors)
+
   @provide({ context: msThemeContext })
   @property({ attribute: false })
-  themeManager = new MSThemeManager(defaultMSTheme)
+  themeManager = new MSThemeManager({
+    default: structuredClone(defaultMSTheme),
+    dark: truthyMerge(structuredClone(defaultMSTheme), { colors: darkColors }),
+  })
 
-  // Color properties
-  @property({ type: String }) set 'text-color'(val: string) {
-    this.themeManager.updateColor('text', val)
-    this.requestUpdate('text-color', val)
+  @property({ type: String }) set theme(val: string) {
+    this.themeManager.theme = val
+    this.requestUpdate('theme', val)
   }
 
-  @property({ type: String }) set 'background-color'(val: string) {
-    this.themeManager.updateColor('background', val)
-    this.requestUpdate('background-color', val)
+  attributeChangedCallback(name: string, old: string | null, value: string | null): void {
+    super.attributeChangedCallback(name, old, value)
+    // @TODO: create a function to update every key in theme not only colors
+    if (value && old !== value && Object.keys(defaultMSTheme.colors).includes(name)) {
+      this.themeManager.updateColor(name as keyof MSTheme['colors'], value)
+    }
   }
 
-  @property({ type: String }) set 'primary-color'(val: string) {
-    this.themeManager.updateColor('primary', val)
-    this.requestUpdate('primary-color', val)
+  private _overrideCssVariables() {
+    const isClientSide = typeof window !== 'undefined'
+    if (isClientSide) {
+      const sheet = new CSSStyleSheet()
+      sheet.replaceSync(`:host {${objToCssVars(this.themeManager.themeObject.colors)}}`)
+      this.shadowRoot!.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
+    }
   }
-
-  @property({ type: String }) set 'secondary-color'(val: string) {
-    this.themeManager.updateColor('secondary', val)
-    this.requestUpdate('secondary-color', val)
-  }
-
-  @property({ type: String }) set 'accent-color'(val: string) {
-    this.themeManager.updateColor('accent', val)
-    this.requestUpdate('accent-color', val)
-  }
-
-  @property({ type: String }) set 'muted-color'(val: string) {
-    this.themeManager.updateColor('muted', val)
-    this.requestUpdate('muted-color', val)
-  }
-
-  // Font properties
-  @property({ type: String }) set 'body-font'(val: string) {
-    this.themeManager.updateFont('body', val)
-    this.requestUpdate('body-font', val)
-  }
-
-  // Font weight properties
-  @property({ type: Number }) set 'body-font-weight'(val: number) {
-    this.themeManager.updateFontWeight('body', val)
-    this.requestUpdate('body-font-weight', val)
-  }
-
-  @property({ type: Number }) set 'bold-font-weight'(val: number) {
-    this.themeManager.updateFontWeight('bold', val)
-    this.requestUpdate('bold-font-weight', val)
-  }
-
-  // line height properties
-  @property({ type: Number }) set 'body-line-height'(val: number) {
-    this.themeManager.updateLineHeight('body', val)
-    this.requestUpdate('body-line-height', val)
-  }
-
-  // private _addStyles() {
-  //   // @TODO: check if there is a way to use Constructable StyleSheets instead
-  //   return html`<style>
-  //     :host{${this.themeManager.theme.cssVars}}
-  //   </style>`
-  // }
 
   render() {
+    this._overrideCssVariables()
     return html`<slot></slot>`
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'ms-theme-provider': MSThemeProvider
+    'ms-theme-provider': MSThemeProvider & MSTheme
   }
 }
