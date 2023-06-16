@@ -31,5 +31,6 @@ export const msTypographyStyles = css`
 
   p {
     ${setFont(17, 24)}
+    margin: 0;
   }
 `
