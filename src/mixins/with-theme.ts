@@ -22,10 +22,6 @@ export const WithTheme = <T extends Constructor<LitElement>>(superClass: T) => {
     @state()
     tm?: MSThemeManager
 
-    attributeChangedCallback(name: string, old: string | null, value: string | null): void {
-      super.attributeChangedCallback(name, old, value)
-    }
-
     private _addStyles() {
       const colorAttributes = this.getAttributeNames().filter(
         (attr) => attr in defaultMSTheme.colors,
