@@ -2,7 +2,8 @@ import { provide } from '@lit-labs/context'
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
-import { objToCssVars } from '~/utils'
+import { darkColors } from '~/styles/usable-tokens/dark-color'
+import { objToCssVars, truthyMerge } from '~/utils'
 
 import { MSThemeManager, msThemeContext } from './theme-context'
 import type { MSTheme } from './theme-default'
@@ -11,24 +12,35 @@ import { extractColorProperties } from './theme-helper'
 
 @customElement('ms-theme-provider')
 export class MSThemeProvider extends LitElement {
-  @provide({ context: msThemeContext })
-  @property({ attribute: false })
-  themeManager = new MSThemeManager(defaultMSTheme)
-
   static properties = extractColorProperties(defaultMSTheme.colors)
 
-  attributeChangedCallback(
-    name: keyof MSTheme['colors'],
-    old: string | null,
-    value: string | null,
-  ): void {
-    if (value && old !== value) this.themeManager.updateColor(name, value)
+  @provide({ context: msThemeContext })
+  @property({ attribute: false })
+  themeManager = new MSThemeManager({
+    default: structuredClone(defaultMSTheme),
+    dark: truthyMerge(structuredClone(defaultMSTheme), { colors: darkColors }),
+  })
+
+  @property({ type: String }) set theme(val: string) {
+    this.themeManager.theme = val
+    this.requestUpdate('theme', val)
+  }
+
+  attributeChangedCallback(name: string, old: string | null, value: string | null): void {
+    super.attributeChangedCallback(name, old, value)
+    // @TODO: create a function to update every key in theme not only colors
+    if (value && old !== value && Object.keys(defaultMSTheme.colors).includes(name)) {
+      this.themeManager.updateColor(name as keyof MSTheme['colors'], value)
+    }
   }
 
   private _overrideCssVariables() {
-    const sheet = new CSSStyleSheet()
-    sheet.replaceSync(`:host {${objToCssVars(this.themeManager.theme.colors)}}`)
-    this.shadowRoot!.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
+    const isClientSide = typeof window !== 'undefined'
+    if (isClientSide) {
+      const sheet = new CSSStyleSheet()
+      sheet.replaceSync(`:host {${objToCssVars(this.themeManager.themeObject.colors)}}`)
+      this.shadowRoot!.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
+    }
   }
 
   render() {

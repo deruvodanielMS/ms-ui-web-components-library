@@ -8,5 +8,5 @@ export const extractColorProperties = (
   }
 } => {
   const entries = Object.keys(colors).map((key) => [key, { type: String }])
-  return { ...Object.fromEntries(entries) }
+  return Object.fromEntries(entries)
 }
