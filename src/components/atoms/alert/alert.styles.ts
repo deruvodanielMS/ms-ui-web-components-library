@@ -19,7 +19,7 @@ export const msAlertStyles = css`
     display: flex;
     padding: 8px 16px;
     position: absolute;
-    width: 100%;
+    width: -webkit-fill-available;
   }
 
   :host .snackbar-wrapper {
