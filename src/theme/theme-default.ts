@@ -1,23 +1,21 @@
-// @TODO: Update with figma tokens
-export const defaultMSTheme = {
-  colors: {
-    text: 'orange',
-    background: 'orange',
-    primary: 'orange',
-    secondary: '#05a',
-    accent: '#609',
-    muted: '#f6f6f6',
-  },
-  fonts: {
-    body: 'sans-serif',
-  },
-  fontWeights: {
-    body: 400,
-    bold: 700,
-  },
-  lineHeights: {
-    body: 1.5,
-  },
+import { borderRadius, type MsBorderRadius } from '~/styles/usable-tokens/border-radius'
+import { borderWidths, type MsBorderWidths } from '~/styles/usable-tokens/border-width'
+import { colors, type MsColors } from '~/styles/usable-tokens/color'
+import { sizings, type MsSizings } from '~/styles/usable-tokens/sizing'
+import { spacings, type MsSpacings } from '~/styles/usable-tokens/spacing'
+
+export interface MSTheme {
+  colors: MsColors
+  sizings: MsSizings
+  spacings: MsSpacings
+  borderRadius: MsBorderRadius
+  borderWidths: MsBorderWidths
 }
 
-export type MSTheme = typeof defaultMSTheme
+export const defaultMSTheme: MSTheme = {
+  colors,
+  sizings,
+  spacings,
+  borderRadius,
+  borderWidths,
+}

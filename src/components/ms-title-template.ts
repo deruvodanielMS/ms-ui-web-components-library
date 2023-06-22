@@ -9,16 +9,23 @@ export class MSTitleTemplate extends WithTheme(LitElement) {
   static styles = css`
     :host {
       display: inline-block;
-      border: solid 1px var(--text-color, ${unsafeCSS(defaultMSTheme.colors.text)});
+      border: solid 2px
+        var(
+          --admin-user-primary-main,
+          ${unsafeCSS(defaultMSTheme.colors['admin-user-primary-main'])}
+        );
       border-radius: 8px;
       padding: 8px 12px;
     }
     h1 {
-      color: var(--text-color, ${unsafeCSS(defaultMSTheme.colors.text)});
+      color: var(
+        --admin-user-primary-main,
+        ${unsafeCSS(defaultMSTheme.colors['admin-user-primary-main'])}
+      );
       width: fit-content;
       padding: 4px 12px;
       border-radius: 4px;
-      font-size: 20px;
+      font-size: 22px;
       margin: 0;
       font-family: sans-serif;
     }

@@ -1,0 +1,222 @@
+{
+  "Regular User": {
+    "Dark": {
+      "value": "#0dba73",
+      "type": "color"
+    },
+    "Main": {
+      "value": "#5edda9",
+      "type": "color"
+    },
+    "Light": {
+      "value": "#b4efd7",
+      "type": "color"
+    },
+    "Background": {
+      "value": "#e7faf2",
+      "type": "color"
+    },
+    "Blue": {
+      "value": "#40515b",
+      "type": "color"
+    }
+  },
+  "Admin User": {
+    "Dark": {
+      "value": "#5932c4",
+      "type": "color"
+    },
+    "Main": {
+      "value": "#9679e4",
+      "type": "color"
+    },
+    "Light": {
+      "value": "#b7a3ed",
+      "type": "color"
+    },
+    "Background": {
+      "value": "#efebfb",
+      "type": "color"
+    }
+  },
+  "Secondary": {
+    "Red": {
+      "Dark": {
+        "value": "#992741",
+        "type": "color"
+      },
+      "Main": {
+        "value": "#e47992",
+        "type": "color"
+      },
+      "Light": {
+        "value": "#f3c1cc",
+        "type": "color"
+      },
+      "Background": {
+        "value": "#fbebef",
+        "type": "color"
+      }
+    },
+    "Green": {
+      "Dark": {
+        "value": "#7a9927",
+        "type": "color"
+      },
+      "Main": {
+        "value": "#c7e479",
+        "type": "color"
+      },
+      "Light": {
+        "value": "#e5f3c1",
+        "type": "color"
+      },
+      "Background": {
+        "value": "#f7fbeb",
+        "type": "color"
+      }
+    },
+    "Teal": {
+      "Dark": {
+        "value": "#27997e",
+        "type": "color"
+      },
+      "Main": {
+        "value": "#79e4cb",
+        "type": "color"
+      },
+      "Light": {
+        "value": "#c1f3e7",
+        "type": "color"
+      },
+      "Background": {
+        "value": "#ebfbf7",
+        "type": "color"
+      }
+    }
+  },
+  "Error": {
+    "Dark": {
+      "value": "#a60b30",
+      "type": "color"
+    },
+    "Main": {
+      "value": "#f15f81",
+      "type": "color"
+    },
+    "Light": {
+      "value": "#f591a9",
+      "type": "color"
+    },
+    "Background": {
+      "value": "#fde7ec",
+      "type": "color"
+    }
+  },
+  "Warning": {
+    "Dark": {
+      "value": "#d65d00",
+      "type": "color"
+    },
+    "Main": {
+      "value": "#f29854",
+      "type": "color"
+    },
+    "Light": {
+      "value": "#f6b98a",
+      "type": "color"
+    },
+    "Background": {
+      "value": "#fdf0e6",
+      "type": "color"
+    }
+  },
+  "Success": {
+    "Dark": {
+      "value": "#046633",
+      "type": "color"
+    },
+    "Main": {
+      "value": "#58b484",
+      "type": "color"
+    },
+    "Light": {
+      "value": "#b2dcc6",
+      "type": "color"
+    },
+    "Background": {
+      "value": "#e6f4ed",
+      "type": "color"
+    }
+  },
+  "Informative": {
+    "Dark": {
+      "value": "#103da5",
+      "type": "color"
+    },
+    "Main": {
+      "value": "#648ef0",
+      "type": "color"
+    },
+    "Light": {
+      "value": "#94b1f4",
+      "type": "color"
+    },
+    "Background": {
+      "value": "#e8eefd",
+      "type": "color"
+    }
+  },
+  "MS": {
+    "Making Sense Green": {
+      "value": "#5edda9",
+      "type": "color"
+    },
+    "Sense Blue": {
+      "value": "#54d9e0",
+      "type": "color"
+    },
+    "Purple": {
+      "value": "#b6a1f8",
+      "type": "color"
+    },
+    "Soft Making Green": {
+      "value": "#0dba73",
+      "type": "color"
+    },
+    "Soft Blue": {
+      "value": "#00b4be",
+      "type": "color"
+    },
+    "Soft Purple": {
+      "value": "#8569de",
+      "type": "color"
+    }
+  },
+  "Gray": {
+    "White": {
+      "value": "#ffffff",
+      "type": "color"
+    },
+    "White-80%": {
+      "value": "#ffffffcc",
+      "type": "color"
+    },
+    "White-34%": {
+      "value": "#ffffff57",
+      "type": "color"
+    },
+    "White-16%": {
+      "value": "#ffffff29",
+      "type": "color"
+    },
+    "White-8%": {
+      "value": "#ffffff14",
+      "type": "color"
+    },
+    "Dark": {
+      "value": "#121212",
+      "type": "color"
+    }
+  }
+}

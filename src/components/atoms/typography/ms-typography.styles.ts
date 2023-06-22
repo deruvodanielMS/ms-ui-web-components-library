@@ -37,6 +37,7 @@ export const msTypographyStyles = css`
 
   p {
     ${setFont(17, 24)}
-    font-weight: inherit
+    font-weight: inherit;
+    margin: 0;
   }
 `

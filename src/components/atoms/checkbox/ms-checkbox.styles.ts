@@ -14,13 +14,20 @@ export const msCheckboxStyles = css`
     width: 16px;
     height: 16px;
     outline: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
   input:hover {
     accent-color: #5932c3;
   }
 
+  input:active {
+    box-shadow: 0px 0px 0px 2px #ccc0f3;
+  }
+
   input[type='checkbox']:disabled + div > * {
     color: #d9d8dc;
+    cursor: not-allowed;
   }
 `
