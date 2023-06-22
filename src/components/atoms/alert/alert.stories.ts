@@ -24,6 +24,8 @@ export default {
   render: (args) =>
     html`
       <ms-alert
+        open
+        .open=${args.open}
         .title=${args.title}
         .renderAsToast=${args.renderAsToast}
         .hasCloseButton="${args.hasCloseButton}"
@@ -44,5 +46,6 @@ export const Checkbox: StoryObj = {
     hasCloseButton: false,
     description: 'description',
     position: 'top-left',
+    open: true,
   },
 }

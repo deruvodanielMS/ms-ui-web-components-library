@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
 import { WithTheme } from '~/mixins'
+import { setAlign } from '~/utils'
 
 import { msAlertStyles } from './alert.styles'
 
@@ -14,7 +15,6 @@ export const positionsAllowed = [
   'bottom-center',
   'bottom-right',
 ]
-
 @customElement('ms-alert')
 export class MSAlert extends WithTheme(LitElement) {
   static styles = msAlertStyles
@@ -35,18 +35,43 @@ export class MSAlert extends WithTheme(LitElement) {
   @property({ type: String })
   description? = ''
 
+  @property({ type: Boolean })
+  open = false
+
   render() {
     return html`
-      <div class=${this.position}>
+      <div class=${this.renderAsToast ? this.position : ''} ?hidden=${!this.open}>
         ${this.renderAsToast ? this.renderAsToastElement() : this.renderAsSnackbarElement()}
       </div>
     `
+  }
+
+  stylePosition() {
+    switch (this.position) {
+      case 'top-left':
+        return setAlign('flex-start', 'flex-start')
+      case 'top-right':
+        return setAlign('flex-start', 'flex-end')
+      case 'top-center':
+        return setAlign('flex-start', 'center')
+      case 'bottom-left':
+        return setAlign('flex-end', 'flex-start')
+      case 'bottom-center':
+        return setAlign('flex-end', 'center')
+      case 'bottom-right':
+        return setAlign('flex-end', 'flex-end')
+    }
   }
 
   renderAsToastElement() {
     const icon = `/src/assets/icons/${this.variant}.svg`
 
     return html`
+      <style>
+        :host{
+          ${this.stylePosition()}
+        }
+      </style>
       <div aria-label=${`${this.variant}-alert-message`} class=${`${this.variant} toast-wrapper`}>
         <img aria-hidden="true" src=${icon} class="icon" />
         <ms-typography variant="p" class="body1"> ${this.title} </ms-typography>
@@ -65,7 +90,11 @@ export class MSAlert extends WithTheme(LitElement) {
       >
         ${this.title}
         ${this.hasCloseButton
-          ? html` <button role="button" aria-label="Cancel">&times;</button> `
+          ? html`
+              <button role="button" aria-label="Cancel" @click=${() => (this.open = false)}>
+                &times;
+              </button>
+            `
           : null}
       </div>
     `

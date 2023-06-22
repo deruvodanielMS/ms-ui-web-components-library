@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-import { setAlign, setFont } from '~/utils'
+import { getThemeColor, setAlign, setFont } from '~/utils'
 
 //@TODO: modify styles with var on style-dictionary & theme
 
@@ -22,51 +22,52 @@ export const msAlertStyles = css`
     width: 100%;
   }
 
-  :host > .snackbar-wrapper {
+  :host .snackbar-wrapper {
     justify-content: space-between;
   }
 
   :host button[role='button'] {
     border: none;
     background: none;
+    cursor: pointer;
     padding: 0;
     font-size: 21px;
   }
 
   .error {
-    background-color: #fde7ec;
-    color: #d70f3e;
+    background-color: ${getThemeColor('error-50-background')};
+    color: ${getThemeColor('error-dark')};
   }
 
   .error > button {
-    color: #d70f3e;
+    color: ${getThemeColor('error-dark')};
   }
 
   .success {
-    background-color: #e6f4ed;
-    color: #058040;
+    background-color: ${getThemeColor('success-50-background')};
+    color: ${getThemeColor('success-dark')};
   }
 
   .success > button {
-    color: #058040;
+    color: ${getThemeColor('success-dark')};
   }
 
   .info {
-    background-color: #e8eefd;
-    color: #154dd1;
+    background-color: ${getThemeColor('informative-50-background')};
+    color: ${getThemeColor('informative-dark')};
   }
 
   .info > button {
-    color: #154dd1;
+    color: ${getThemeColor('informative-dark')};
   }
 
   .warning {
-    background-color: #fdf0e6;
-    color: #d65d00;
+    background-color: ${getThemeColor('error-50-background')};
+    color: ${getThemeColor('warning-dark')};
   }
 
   .warning > button {
-    color: #d65d00;
+    color: ${getThemeColor('warning-dark')};
   }
 
   .body1 {
@@ -115,5 +116,9 @@ export const msAlertStyles = css`
 
   .bottom-right {
     ${setAlign('flex-end', 'flex-end')}
+  }
+
+  .hide {
+    display: none;
   }
 `
