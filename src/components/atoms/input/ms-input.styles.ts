@@ -3,7 +3,6 @@ import { css } from 'lit'
 export const msInputStyles = css`
   :host {
     display: block;
-    margin-bottom: 16px;
   }
 
   input {

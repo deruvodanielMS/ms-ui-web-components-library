@@ -11,16 +11,14 @@ export default {
     disabled: { options: [true, false], control: { type: 'select' } },
     label: { defaultValue: 'Test' },
     message: { defaultValue: 'Informative message' },
-    error: { options: [true, false], control: { type: 'select' } },
-    success: { options: [true, false], control: { type: 'select' } },
+    status: { defaultValue: '' },
     icon: { defaultValue: '' },
   },
   render: (args) =>
     html`<ms-input
       .value=${args.value}
       ?disabled=${args.disabled}
-      ?error=${args.error}
-      ?success=${args.success}
+      .status=${args.status}
       placeholder=${args.placeholder}
       .label=${args.label}
       .message=${args.message}
@@ -36,5 +34,6 @@ export const Input: StoryObj = {
     label: 'Test',
     message: 'Informative message',
     icon: '',
+    status: '',
   },
 }

@@ -36,55 +36,45 @@ export class MSInput extends WithTheme(LitElement) {
   @property({ type: Boolean })
   disabled = false
 
-  @property({ type: Boolean })
-  outline = false
-
-  @property({ type: Boolean })
-  success = false
-
-  @property({ type: Boolean })
-  error = false
+  @property({ type: String })
+  status = ''
 
   render() {
     return this.renderWithStyles(
       html`
+        <ms-typography variant="p">${this.label}</ms-typography>
         <div>
-          <ms-typography variant="p">${this.label}</ms-typography>
-          <div>
-            ${this.icon
-              ? html`
-                  <div class="icon-container">
-                    <i class="${this.icon}"></i>
-                  </div>
-                `
-              : ''}
-            <input
-              class=${this.success ? 'success' : this.error ? 'error' : ''}
-              ?error=${this.error}
-              ?success=${this.success}
-              ?disabled=${this.disabled}
-              type="text"
-              placeholder="${this.placeholder}"
-              .value=${this.value}
-              @input=${this.inputHandler}
-            />
-          </div>
-          <div>
-            ${this.iconState
-              ? html`
-                  <div class="icon-container">
-                    <i class="${this.icon}"></i>
-                  </div>
-                `
-              : ''}
-            <ms-typography variant="span"
-              >${this.success
-                ? this.successLabel
-                : this.error
-                ? this.errorLabel
-                : this.message}</ms-typography
-            >
-          </div>
+          ${this.icon
+            ? html`
+                <div class="icon-container">
+                  <i class="${this.icon}"></i>
+                </div>
+              `
+            : ''}
+          <input
+            class=${this.status === 'success' ? 'success' : this.status === 'error' ? 'error' : ''}
+            ?disabled=${this.disabled}
+            type="text"
+            placeholder="${this.placeholder}"
+            .value=${this.value}
+            @input=${this.inputHandler}
+          />
+        </div>
+        <div>
+          ${this.iconState
+            ? html`
+                <div class="icon-container">
+                  <i class="${this.icon}"></i>
+                </div>
+              `
+            : ''}
+          <ms-typography variant="span"
+            >${this.status === 'success'
+              ? this.successLabel
+              : this.status === 'error'
+              ? this.errorLabel
+              : this.message}</ms-typography
+          >
         </div>
       `,
     )
