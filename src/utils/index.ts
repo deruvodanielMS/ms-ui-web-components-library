@@ -1,4 +1,4 @@
 export * from './data-converters'
 export * from './data-mergers'
-export * from './styles'
+export * from './styling'
 export * from './types'
