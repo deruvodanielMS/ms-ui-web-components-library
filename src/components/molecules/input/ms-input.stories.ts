@@ -11,8 +11,7 @@ export default {
     disabled: { options: [true, false], control: { type: 'select' } },
     label: { defaultValue: 'Test' },
     message: { defaultValue: 'Informative message' },
-    status: { defaultValue: '' },
-    icon: { defaultValue: '' },
+    status: { options: ['error', 'success', ''], control: { type: 'select' } },
   },
   render: (args) =>
     html`<ms-input
@@ -22,7 +21,6 @@ export default {
       placeholder=${args.placeholder}
       .label=${args.label}
       .message=${args.message}
-      .icon=${args.icon}
     />`,
 } as Meta
 
@@ -33,7 +31,6 @@ export const Input: StoryObj = {
     placeholder: 'Placeholder',
     label: 'Test',
     message: 'Informative message',
-    icon: '',
     status: '',
   },
 }
