@@ -11,9 +11,6 @@ export const typesAllowed = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'a
 export class MSTypography extends WithTheme(LitElement) {
   static styles = msTypographyStyles
 
-  //@TODO: set to specific strings
-  // 'center' | 'inherit' | 'justify' | 'left' | 'right'
-
   @property({ type: String })
   align = 'inherit'
 
@@ -27,10 +24,6 @@ export class MSTypography extends WithTheme(LitElement) {
   variant = ''
 
   render() {
-    this.style.textAlign = this.align
-    this.style.fontWeight = this.weight
-    this.style.color = this.color
-
     this.createTypography()
   }
 
@@ -38,6 +31,9 @@ export class MSTypography extends WithTheme(LitElement) {
     if (!this.variant && !typesAllowed.includes(this.variant)) return
     if (!this.shadowRoot) return
 
+    this.style.textAlign = this.align
+    this.style.fontWeight = this.weight
+    this.style.color = this.color
     const elementAlreadyCreatted = this.shadowRoot?.querySelector('[data-typography="created"]')
     elementAlreadyCreatted && elementAlreadyCreatted.remove()
 
