@@ -27,7 +27,7 @@ export class MSTitleTemplate extends WithTheme(LitElement) {
       border-radius: 4px;
       font-size: 22px;
       margin: 0;
-      font-family: sans-serif;
+      font-family: var(--heading-medium-h1-font-family, sans-serif);
     }
   `
 

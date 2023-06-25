@@ -1,6 +1,6 @@
 import { createContext } from '@lit-labs/context'
 
-import { truthyMerge } from '~/utils'
+import { truthyMerge, unFlattenObjectByKeys } from '~/utils'
 
 import type { MSTheme } from './theme-default'
 
@@ -46,9 +46,19 @@ export class MSThemeManager {
   }
 
   public updateColor(key: keyof MSTheme['colors'], val: string) {
+    this._themes.set(this._currentTheme, truthyMerge(this.themeObject, { colors: { [key]: val } }))
+  }
+
+  public updateTypography(key: string, val: string) {
+    const possibleKeys = Object.keys(this.themeObject.typographies)
+    const singleTypographyKey = unFlattenObjectByKeys(possibleKeys, { [key]: val })
+    if (!singleTypographyKey) return
+
+    const typographiesObj = truthyMerge(this.themeObject.typographies, singleTypographyKey)
+
     this._themes.set(
       this._currentTheme,
-      truthyMerge(this.themeObject, { colors: { [key]: val } }) as MSTheme,
+      truthyMerge(this.themeObject, { typographies: typographiesObj }),
     )
   }
 }
