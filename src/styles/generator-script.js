@@ -10,7 +10,7 @@ StyleDictionary.registerFormat({
     const match = pattern.exec(destination)
     const tokenType = match[1].replace(/-./g, (x) => x[1].toUpperCase())
 
-    const typeObjectName = tokenType.endsWith('s') ? tokenType : tokenType + 's'
+    const typeObjectName = tokenType
 
     let objectEntries = []
 

@@ -1,4 +1,6 @@
-import type { MsColors } from '~/styles/usable-tokens/color'
+import type { MsColors } from '~/styles/tokens/default/colors'
+import type { MsTypographies } from '~/styles/tokens/default/typographies'
+import { flattenObject } from '~/utils'
 
 export const extractColorProperties = (
   colors: MsColors,
@@ -8,5 +10,16 @@ export const extractColorProperties = (
   }
 } => {
   const entries = Object.keys(colors).map((key) => [key, { type: String }])
+  return Object.fromEntries(entries)
+}
+
+export const extractTypographiesProperties = (
+  typographies: MsTypographies,
+): {
+  [key in keyof MsTypographies]: {
+    type: StringConstructor
+  }
+} => {
+  const entries = Object.keys(flattenObject(typographies)).map((key) => [key, { type: String }])
   return Object.fromEntries(entries)
 }

@@ -2,17 +2,22 @@ import { provide } from '@lit-labs/context'
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
-import { darkColors } from '~/styles/usable-tokens/dark-color'
-import { objToCssVars, truthyMerge } from '~/utils'
+import { colors as darkColors } from '~/styles/tokens/dark/colors'
+import { flattenObject, objToCssVars, truthyMerge } from '~/utils'
 
 import { MSThemeManager, msThemeContext } from './theme-context'
 import type { MSTheme } from './theme-default'
 import { defaultMSTheme } from './theme-default'
-import { extractColorProperties } from './theme-helper'
+import { extractColorProperties, extractTypographiesProperties } from './theme-helper'
+
+const flattenTypographiesProperties = extractTypographiesProperties(defaultMSTheme.typographies)
 
 @customElement('ms-theme-provider')
 export class MSThemeProvider extends LitElement {
-  static properties = extractColorProperties(defaultMSTheme.colors)
+  static properties = {
+    ...extractColorProperties(defaultMSTheme.colors),
+    ...flattenTypographiesProperties,
+  }
 
   @provide({ context: msThemeContext })
   @property({ attribute: false })
@@ -28,9 +33,16 @@ export class MSThemeProvider extends LitElement {
 
   attributeChangedCallback(name: string, old: string | null, value: string | null): void {
     super.attributeChangedCallback(name, old, value)
-    // @TODO: create a function to update every key in theme not only colors
-    if (value && old !== value && Object.keys(defaultMSTheme.colors).includes(name)) {
+    if (!value || old === value) return
+
+    // @TODO: create a function to update every key in theme not only colors and typographies
+    if (Object.keys(defaultMSTheme.colors).includes(name)) {
       this.themeManager.updateColor(name as keyof MSTheme['colors'], value)
+      return
+    }
+    if (Object.keys(flattenTypographiesProperties).includes(name)) {
+      this.themeManager.updateTypography(name, value)
+      return
     }
   }
 
@@ -38,7 +50,11 @@ export class MSThemeProvider extends LitElement {
     const isClientSide = typeof window !== 'undefined'
     if (isClientSide) {
       const sheet = new CSSStyleSheet()
-      sheet.replaceSync(`:host {${objToCssVars(this.themeManager.themeObject.colors)}}`)
+      const cssVariables = objToCssVars({
+        ...this.themeManager.themeObject.colors,
+        ...flattenObject(this.themeManager.themeObject.typographies),
+      })
+      sheet.replaceSync(`:host {${cssVariables}}`)
       this.shadowRoot!.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
     }
   }

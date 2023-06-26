@@ -1,3 +1,5 @@
+import { pluralize } from './generator-helper.js'
+
 // @TODO: find a better way to get token types, currently are copied from figma token
 const tokenTypes = [
   'color',
@@ -5,6 +7,7 @@ const tokenTypes = [
   'spacing',
   'borderRadius',
   'borderWidth',
+  'typography',
   // 'boxShadow',
   // 'typography',
   // 'fontFamily',
@@ -37,13 +40,13 @@ export default {
     // },
     ts: {
       transformGroup: 'js',
-      buildPath: 'src/styles/usable-tokens/',
+      buildPath: 'src/styles/tokens/default/',
       transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/hex'],
       files: tokenTypes.map((tokenType) => {
         return {
-          destination: `${tokenType
-            .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2')
-            .toLowerCase()}.ts`,
+          destination: `${pluralize(
+            tokenType.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase(),
+          )}.ts`,
           format: 'custom/typed-ts',
           filter: {
             type: tokenType,
