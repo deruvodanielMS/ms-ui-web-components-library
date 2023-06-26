@@ -2,8 +2,6 @@ import { css } from 'lit'
 
 import { getThemeColor, setAlign, setFont } from '~/utils'
 
-//@TODO: modify styles with var on style-dictionary & theme
-
 export const msAlertStyles = css`
   :host {
     display: flex;

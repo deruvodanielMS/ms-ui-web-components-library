@@ -1,6 +1,7 @@
-import { LitElement, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { myElementStyles } from './my-element.styles';
+import { LitElement, html } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+
+import { myElementStyles } from './my-element.styles'
 
 /**
  * An example element.
@@ -11,29 +12,29 @@ import { myElementStyles } from './my-element.styles';
 
 @customElement('my-element')
 export class MyElement extends LitElement {
-  static styles = [myElementStyles];
+  static styles = [myElementStyles]
 
   /**
    * The name to say "Hello" to.
    */
   @property({ type: String })
-  name = 'World';
+  name = 'World'
 
   /**
    * The number of times the button has been clicked.
    */
   @property({ type: Number })
-  count = 0;
+  count = 0
 
   /**
    * Whether to show the button as a submit button.
    */
   @property({ type: Boolean })
-  isSubmit = false;
+  isSubmit = false
 
   private _onButtonKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
-      this._onClick();
+      this._onClick()
     }
   }
 
@@ -45,32 +46,46 @@ export class MyElement extends LitElement {
       <!-- Button -->
       ${this.isSubmit
         ? html`
-            <input type="button" @click=${this._onClick} @keydown=${this._onButtonKeyDown} part="button" value="Click Count: ${this.count}" />
+            <input
+              type="button"
+              @click=${this._onClick}
+              @keydown=${this._onButtonKeyDown}
+              part="button"
+              value="Click Count: ${this.count}"
+            />
           `
         : html`
-            <button @click=${this._onClick} @keydown=${this._onButtonKeyDown} part="button" role="button" aria-label="Increment Count">
+            <button
+              @click=${this._onClick}
+              @keydown=${this._onButtonKeyDown}
+              part="button"
+              role="button"
+              aria-label="Increment Count"
+            >
               Click Count: ${this.count}
             </button>
           `}
 
-      <div id="dialog-description">Clicking this button will open a dialog to increment the count.</div>
+      <div id="dialog-description">
+        Clicking this button will open a dialog to increment the count.
+      </div>
 
       <!-- Slot content -->
       <slot></slot>
-    `;
+    `
   }
 
   private _onClick() {
-    this.count++;
+    this.count++
   }
 
   foo(): string {
-    return 'foo';
+    return 'foo'
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'my-element': MyElement;
+    'my-element': MyElement
   }
 }

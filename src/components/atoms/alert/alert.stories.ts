@@ -37,7 +37,7 @@ export default {
     `,
 } as Meta
 
-export const Checkbox: StoryObj = {
+export const Alert: StoryObj = {
   name: 'MSAlert',
   args: {
     title: 'Alert',

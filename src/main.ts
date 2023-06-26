@@ -1,2 +1,2 @@
+import '~/components/atoms/icon-button'
 import './components'
-import './components/ms-title-template'
