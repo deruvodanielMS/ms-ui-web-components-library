@@ -1,6 +1,6 @@
 import { unsafeCSS } from 'lit'
 
-import type { MsColors } from '~/styles/usable-tokens/color'
+import type { MsColors } from '~/styles/tokens/default/colors'
 import { defaultMSTheme } from '~/theme'
 
 export const getThemeColor = (token: keyof MsColors) => {

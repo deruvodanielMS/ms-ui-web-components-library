@@ -1,21 +1,24 @@
-import { borderRadius, type MsBorderRadius } from '~/styles/usable-tokens/border-radius'
-import { borderWidths, type MsBorderWidths } from '~/styles/usable-tokens/border-width'
-import { colors, type MsColors } from '~/styles/usable-tokens/color'
-import { sizings, type MsSizings } from '~/styles/usable-tokens/sizing'
-import { spacings, type MsSpacings } from '~/styles/usable-tokens/spacing'
+import { borderRadiuses, type MsBorderRadiuses } from '~/styles/tokens/default/border-radiuses'
+import { borderWidths, type MsBorderWidths } from '~/styles/tokens/default/border-widths'
+import { colors, type MsColors } from '~/styles/tokens/default/colors'
+import { sizings, type MsSizings } from '~/styles/tokens/default/sizings'
+import { spacings, type MsSpacings } from '~/styles/tokens/default/spacings'
+import { typographies, type MsTypographies } from '~/styles/tokens/default/typographies'
 
 export interface MSTheme {
   colors: MsColors
   sizings: MsSizings
   spacings: MsSpacings
-  borderRadius: MsBorderRadius
+  borderRadiuses: MsBorderRadiuses
   borderWidths: MsBorderWidths
+  typographies: MsTypographies
 }
 
 export const defaultMSTheme: MSTheme = {
   colors,
   sizings,
   spacings,
-  borderRadius,
+  borderRadiuses,
   borderWidths,
+  typographies,
 }

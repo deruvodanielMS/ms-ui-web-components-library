@@ -75,7 +75,8 @@ export const colors = {
   'regular-user-primary-light': '#58fab4',
   'regular-user-primary-background': '#a9ffd2',
   'admin-user-primary-dark': '#5932c3',
-  'admin-user-primary-main': '#6237d7',
+  'admin-user-primary-main': 'pink',
+  // 'admin-user-primary-main': '#6237d7',
   'admin-user-primary-300-disabled': '#9679e4',
   'admin-user-primary-light': '#cdbff3',
   'admin-user-primary-background': '#eeeafb',
@@ -98,5 +99,3 @@ export const colors = {
   'shadow-right-color': '#37363b66',
   'shadow-left-color': '#37363b66',
 }
-
-export type MsColors = typeof colors
