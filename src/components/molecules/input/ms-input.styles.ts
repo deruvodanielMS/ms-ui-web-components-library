@@ -61,7 +61,7 @@ export const msInputStyles = css`
     width: 16px;
   }
 
-  .message-caption {
+  .none-caption {
     ${setFont(15, 24)}
     color: ${getThemeColor('gray-500')};
   }

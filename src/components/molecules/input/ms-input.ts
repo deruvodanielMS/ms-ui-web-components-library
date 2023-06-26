@@ -98,7 +98,7 @@ export class MSInput extends WithTheme(LitElement) {
 
     return this.renderWithStyles(
       html`
-        <ms-typography variant="p" class="body1">${this.label}</ms-typography>
+        <ms-typography variant="p" class="body1" aria-label="title">${this.label}</ms-typography>
         <input
           id="input-${this.id}"
           aria-labelledby="input"
@@ -110,10 +110,13 @@ export class MSInput extends WithTheme(LitElement) {
           @input=${this.inputHandler}
         />
         <div class="message-group" role="group" aria-labelledby="label-${this.id}">
-          ${this.status !== '' ? html`<img aria-hidden="true" src=${icon} class="icon" />` : null}
+          ${this.status !== 'none'
+            ? html`<img aria-hidden="true" src=${icon} class="icon" />`
+            : null}
           <ms-typography
             variant="span"
             class="${this.status === '' ? 'message' : this.status}-caption"
+            aria-label="description"
             >${this.status === 'success'
               ? this.successLabel
               : this.status === 'error'

@@ -6,19 +6,16 @@ import './ms-input'
 export default {
   title: 'Input',
   argTypes: {
-    value: { defaultValue: '' },
-    placeholder: { defaultValue: '' },
-    disabled: { options: [true, false], control: { type: 'select' } },
+    disabled: { options: [true, false], control: { type: 'boolean' } },
     label: { defaultValue: 'Test' },
-    message: { defaultValue: 'Informative message' },
-    status: { options: ['error', 'success', ''], control: { type: 'select' } },
+    status: { options: ['error', 'success', 'none'], control: { type: 'select' } },
   },
   render: (args) =>
     html`<ms-input
       .value=${args.value}
       ?disabled=${args.disabled}
       .status=${args.status}
-      placeholder=${args.placeholder}
+      .placeholder=${args.placeholder}
       .label=${args.label}
       .message=${args.message}
     />`,
@@ -31,6 +28,5 @@ export const Input: StoryObj = {
     placeholder: 'Placeholder',
     label: 'Test',
     message: 'Informative message',
-    status: '',
   },
 }
