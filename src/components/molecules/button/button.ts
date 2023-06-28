@@ -31,6 +31,14 @@ export class MSButton extends WithTheme(LitElement) {
   size = 'small'
 
   /**
+   * Set position for any icon, custom or preloaded one
+   * @type {string}
+   * @default 'left'
+   */
+  @property({ type: String })
+  iconPosition = 'left'
+
+  /**
    * To display a custom icon, set this to `true` and the `icon` property to `false`.
    * Also use the 'slot' of this component to place you custom `<svg>`
    * @type {boolean}
@@ -57,20 +65,36 @@ export class MSButton extends WithTheme(LitElement) {
           ?disabled=${this.disabled}
           @click=${this.click}
           aria-label=${this.ariaLabel}
-          class=${`${this.variant === 'outlined' ? 'outlined' : ''} ${
+          class=${`${this.variant !== 'contained' ? this.variant : ''} ${
             this.size !== 'small' ? this.size : ''
           }`}
         >
-          ${this.icon && !this.customIcon ? Icons[this.icon] : null}
-          ${this.customIcon ? this.renderIcon() : null}
-          <slot></slot>
+          ${this.iconPosition === 'left'
+            ? this.customIcon
+              ? this.renderIcon()
+              : this.icon && !this.customIcon
+              ? Icons[this.icon]
+              : null
+            : null}
+
+          <ms-typography variant=${this.size === 'small' ? 'paragraph-body-2' : 'paragraph-body-1'}>
+            <slot></slot>
+          </ms-typography>
+
+          ${this.iconPosition === 'right'
+            ? this.customIcon
+              ? this.renderIcon()
+              : this.icon && !this.customIcon
+              ? Icons[this.icon]
+              : null
+            : null}
         </button>
       `,
     )
   }
 
   renderIcon() {
-    return html`<slot name="icon"></slot>`
+    return html`<slot name=${this.iconPosition === 'left' ? 'icon-left' : 'icon-right'}></slot>`
   }
 }
 
