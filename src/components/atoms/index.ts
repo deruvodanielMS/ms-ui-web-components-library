@@ -1,5 +1,6 @@
 export * from './alert'
 export * from './checkbox'
 export * from './select'
+export * from './tag'
 export * from './toggle'
 export * from './typography'
