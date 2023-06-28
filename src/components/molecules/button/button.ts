@@ -77,9 +77,7 @@ export class MSButton extends WithTheme(LitElement) {
               : null
             : null}
 
-          <ms-typography variant=${this.size === 'small' ? 'paragraph-body-2' : 'paragraph-body-1'}>
-            <slot></slot>
-          </ms-typography>
+          <slot></slot>
 
           ${this.iconPosition === 'right'
             ? this.customIcon
