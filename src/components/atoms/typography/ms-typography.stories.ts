@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from 'lit'
 
-import { typesAllowed } from './ms-typography'
+import { typographyVariants } from './ms-typography'
 
 export default {
   title: 'Typography',
@@ -11,7 +11,7 @@ export default {
       control: { type: 'select' },
     },
     variant: {
-      options: typesAllowed,
+      options: typographyVariants,
       control: { type: 'select' },
     },
     weight: {
@@ -36,7 +36,7 @@ export const Checkbox: StoryObj = {
   name: 'MSTypography',
   args: {
     align: 'inherit',
-    variant: 'h1',
+    variant: 'paragraph-body-1',
     slot: 'Here a text as h1',
     color: 'red',
     weight: '400',

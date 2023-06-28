@@ -25,7 +25,12 @@ export const OneLvlBbjToCssVars = <T extends JSObject>(entryObj: T): string => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const objToCssVars = (obj: { [key: string]: any }) => {
   return Object.entries(obj)
-    .map(([key, value]) => `--${key}: ${value};`)
+    .map(([key, value]) => {
+      // @TODO: replace this if statement implementation with SD expand typography and regroup
+      if (key.endsWith('line-height') || key.endsWith('font-size')) return `--${key}: ${value}px;`
+
+      return `--${key}: ${value};`
+    })
     .join('\n')
 }
 
