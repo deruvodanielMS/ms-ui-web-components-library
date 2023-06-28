@@ -72,9 +72,9 @@ export class MSButton extends WithTheme(LitElement) {
           ${this.iconPosition === 'left'
             ? this.customIcon
               ? this.renderIcon()
-              : this.icon && !this.customIcon
-              ? Icons[this.icon]
               : null
+            : this.icon
+            ? Icons[this.icon]
             : null}
 
           <slot></slot>
@@ -82,9 +82,9 @@ export class MSButton extends WithTheme(LitElement) {
           ${this.iconPosition === 'right'
             ? this.customIcon
               ? this.renderIcon()
-              : this.icon && !this.customIcon
-              ? Icons[this.icon]
               : null
+            : this.icon
+            ? Icons[this.icon]
             : null}
         </button>
       `,
