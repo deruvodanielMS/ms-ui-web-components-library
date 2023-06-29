@@ -2,7 +2,7 @@ import { css } from 'lit'
 
 import { getThemeColor } from '~/utils'
 
-export const msTagStyles = css`
+export const msChipStyles = css`
   :host {
     display: inline-flex;
     width: fit-content;
