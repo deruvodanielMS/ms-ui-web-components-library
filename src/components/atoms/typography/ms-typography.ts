@@ -1,4 +1,4 @@
-import { LitElement } from 'lit'
+import { LitElement, nothing } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
 import { WithTheme } from '~/mixins'
@@ -54,6 +54,7 @@ export class MSTypography extends WithTheme(LitElement) {
 
   render() {
     this.createTypography()
+    return this.renderWithStyles(nothing)
   }
 
   createTypography() {

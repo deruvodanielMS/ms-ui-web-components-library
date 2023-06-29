@@ -63,7 +63,7 @@ export class MSButton extends WithTheme(LitElement) {
         <button
           ?disabled=${this.disabled}
           @click=${this.click}
-          aria-label=${this.ariaLabel}
+          aria-label=${this['aria-label']}
           class=${`${this.variant !== 'contained' ? this.variant : ''} ${
             this.size !== 'small' ? this.size : ''
           } ${this.iconPosition === 'right' ? 'right' : ''}`}
