@@ -20,6 +20,10 @@ export const msButtonstyles = css`
     padding: 8px 12px;
   }
 
+  button.right {
+    flex-direction: row-reverse;
+  }
+
   button > svg {
     height: 12px;
     width: 12px;

@@ -2,18 +2,33 @@ import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
 import type { MsIcons } from '~/assets/icons'
-import { Icons } from '~/assets/icons'
+import { Icons, iconNameAllowed } from '~/assets/icons'
 import { WithTheme } from '~/mixins'
 import { getThemeColor } from '~/utils'
 
 import { msButtonstyles } from './button.styles'
+import { iconPositionsAllowed, sizesAllowed, variantAllowed } from './button.types'
+
+/**
+ * @prop {string} size - type of sizy for the button between 'small', 'medium' or 'large'
+ * @prop {string} ariaLabel - the accesible attribute for the inner button
+ * @prop {string} iconPosition - where to display the icon 'left' or 'right' to the label
+ * @prop {boolean} customIcon - the ability of render a customicon that is sended as a child of the component and render in a slot. By default is set in `false`.
+ * @prop {string} icon - The name of the preload icon to render for the button
+ * @prop {boolean} disabled
+ * @prop {string} variant - type of styling for the button between 'outlined', 'text' or 'contained'
+ *
+ * @summary this is a generic button that works both as a labeled button as an icon button
+ *
+ * @tag ms-button
+ */
 
 @customElement('ms-button')
 export class MSButton extends WithTheme(LitElement) {
   static styles = msButtonstyles
 
   @property({ type: String })
-  variant = 'contained'
+  variant = variantAllowed[0]
 
   @property({ type: String })
   color =
@@ -28,33 +43,16 @@ export class MSButton extends WithTheme(LitElement) {
   ariaLabel = ''
 
   @property({ type: String })
-  size = 'small'
+  size = sizesAllowed[0]
 
-  /**
-   * Set position for any icon, custom or preloaded one
-   * @type {string}
-   * @default 'left'
-   */
   @property({ type: String })
-  iconPosition = 'left'
+  iconPosition = iconPositionsAllowed[0]
 
-  /**
-   * To display a custom icon, set this to `true` and the `icon` property to `false`.
-   * Also use the 'slot' of this component to place you custom `<svg>`
-   * @type {boolean}
-   * @default false
-   */
   @property({ type: Boolean })
   customIcon = false
 
-  /**
-   * The icon property will display any preloaded icon in this library.
-   * For no icon at all, set this to 'none' and the property `customIcon` to false
-   * @type {string}
-   * @default 'none'
-   */
   @property({ type: String })
-  icon = 'none' as keyof MsIcons
+  icon?: keyof MsIcons
 
   render() {
     this.style.fill = this.color
@@ -67,32 +65,25 @@ export class MSButton extends WithTheme(LitElement) {
           aria-label=${this.ariaLabel}
           class=${`${this.variant !== 'contained' ? this.variant : ''} ${
             this.size !== 'small' ? this.size : ''
-          }`}
+          } ${this.iconPosition === 'right' ? 'right' : ''}`}
         >
-          ${this.iconPosition === 'left'
-            ? this.customIcon
-              ? this.renderIcon()
-              : null
-            : this.icon
-            ? Icons[this.icon]
-            : null}
-
+          ${this.customIcon ? this.renderCustomIcon() : this.setTypeOfIcon()}
           <slot></slot>
-
-          ${this.iconPosition === 'right'
-            ? this.customIcon
-              ? this.renderIcon()
-              : null
-            : this.icon
-            ? Icons[this.icon]
-            : null}
         </button>
       `,
     )
   }
 
-  renderIcon() {
-    return html`<slot name=${this.iconPosition === 'left' ? 'icon-left' : 'icon-right'}></slot>`
+  setTypeOfIcon() {
+    if (this.icon) {
+      if (!iconNameAllowed.includes(this.icon)) return
+      return html`${Icons[this.icon]}`
+    }
+    return
+  }
+
+  renderCustomIcon() {
+    return html`<slot name="custom-icon"></slot>`
   }
 }
 

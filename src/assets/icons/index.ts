@@ -34,3 +34,5 @@ export const Icons = {
   warning: warning,
 }
 export type MsIcons = typeof Icons
+
+export const iconNameAllowed = Object.keys(Icons)

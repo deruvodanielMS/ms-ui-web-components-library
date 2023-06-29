@@ -1,5 +1,4 @@
 export * from './data-converters'
 export * from './data-mergers'
-export * from './options'
 export * from './styling'
 export * from './types'
