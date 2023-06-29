@@ -37,10 +37,10 @@ export class MSButton extends WithTheme(LitElement) {
       : getThemeColor('regular-user-primary-main').toString()
 
   @property({ type: Boolean })
-  disabled = false
+  disabled = false;
 
   @property({ type: String })
-  ariaLabel = ''
+  ['aria-label'] = ''
 
   @property({ type: String })
   size = sizesAllowed[0]
@@ -56,6 +56,7 @@ export class MSButton extends WithTheme(LitElement) {
 
   render() {
     this.style.fill = this.color
+    this.setAttribute('aria-label', this['aria-label'])
 
     return this.renderWithStyles(
       html`

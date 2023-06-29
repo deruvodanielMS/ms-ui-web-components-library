@@ -39,7 +39,7 @@ export default {
     html`
       <ms-button
         .disabled=${args.disabled}
-        ariaLabel="label for button"
+        aria-label="label for button"
         .click=${args.handleClick}
         .variant=${args.variant}
         .size=${args.size}
