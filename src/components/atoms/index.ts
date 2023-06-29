@@ -1,5 +1,5 @@
 export * from './alert'
 export * from './checkbox'
-export * from './select'
+export * from './chip'
 export * from './toggle'
 export * from './typography'

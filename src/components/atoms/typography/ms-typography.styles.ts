@@ -22,10 +22,13 @@ const typographyStylesGenerator = () => {
 }
 
 export const msTypographyStyles = css`
+  :host {
+    color: ${getThemeColor('gray-900')};
+    box-sizing: border-box;
+  }
   :host > *:first-child {
     margin: 0;
     box-sizing: border-box;
-    color: ${getThemeColor('gray-900')};
   }
   ${unsafeCSS(typographyStylesGenerator())}
 `
